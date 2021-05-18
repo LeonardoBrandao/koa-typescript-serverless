@@ -1,0 +1,53 @@
+service: koa-typescript-serverless
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+
+plugins:
+  - serverless-offline
+
+# you can overwrite defaults here
+#  stage: dev
+#  region: us-east-1
+
+# you can add statements to the Lambda function's IAM Role here
+#  iamRoleStatements:
+#    - Effect: "Allow"
+#      Action:
+#        - "s3:ListBucket"
+#      Resource: { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "ServerlessDeploymentBucket" } ] ]  }
+#    - Effect: "Allow"
+#      Action:
+#        - "s3:PutObject"
+#      Resource:
+#        Fn::Join:
+#          - ""
+#          - - "arn:aws:s3:::"
+#            - "Ref" : "ServerlessDeploymentBucket"
+#            - "/*"
+
+# you can define service wide environment variables here
+#  environment:
+#    variable1: value1
+
+package:
+  exclude:
+    - node_modules/typescript/**
+    - node_modules/ts-node/**
+    - node_modules/ts-loader/**
+    - node_modules/ts-lib/**
+    - node_modules/rimraf/**
+    - node_modules/nodemon/**
+    - .vscode/**
+    - dist/**
+    - src/**
+    
+
+functions:
+  api:
+    handler: lambda/lambda.handler
+    events:
+      - http:
+          path: /{proxy+}
+          method: any

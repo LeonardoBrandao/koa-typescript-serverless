@@ -1,3 +1,6 @@
 node_modules
 dist
 .vscode
+lambda
+jspm_packages
+.serverless

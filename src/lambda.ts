@@ -1,4 +1,4 @@
 import app from './app'
-const serverless = require('aws-serverless-koa');
 
+const serverless: any = require('serverless-http')
 module.exports.handler = serverless(app)
